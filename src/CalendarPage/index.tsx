@@ -3,17 +3,17 @@ import styled from '@emotion/styled'
 import dayjs from 'dayjs'
 
 import Label from 'CalendarPage/Label'
+import TimeBlock from 'CalendarPage/TimeBlock'
 import {
 	cssGridTimeFormat,
 	dayConsts,
 	endRowLine,
 } from 'CalendarPage/constants'
-import TimeBlock from './TimeBlock'
 
 const date = dayjs('2020-01-01')
 
 const timesArray = [...Array(dayConsts.hours)].map((e, i) =>
-	date.add(i, 'hours')
+	date.add(i, 'hour')
 )
 
 const timesForGrid = timesArray.map(timeObj => {
@@ -47,13 +47,12 @@ const TestShift = styled.div`
 	opacity: 0.5;
 `
 
-const CalendarPage = () => (
+const CalendarPage: React.FC = () => (
 	<>
 		<div>
 			<h1>CSS Grid Calendar</h1>
 		</div>
 		<Container>
-			{/* <Label start={date.add(1, 'hours')} end={date.add(2, 'hours')} /> */}
 			{timesArray.map(dayObj => (
 				<Fragment key={dayObj.format('ha')}>
 					<Label start={dayObj} />

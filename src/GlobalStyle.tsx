@@ -1,7 +1,7 @@
 import React from 'react'
 import { Global, css } from '@emotion/react'
 
-const GlobalStyle = () => (
+const GlobalStyle: React.FC = () => (
 	<Global
 		styles={css`
 			body {
