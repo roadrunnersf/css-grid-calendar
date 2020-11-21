@@ -1,23 +1,20 @@
 import React, { Fragment } from 'react'
 import styled from '@emotion/styled'
-import dayjs from 'dayjs'
+import dayjs, { Dayjs } from 'dayjs'
 
 import Label from 'CalendarPage/Label'
 import TimeBlock from 'CalendarPage/TimeBlock'
-import {
-	cssGridTimeFormat,
-	dayConsts,
-	endRowLine,
-} from 'CalendarPage/constants'
+import Event from 'CalendarPage/Event'
+import { formats, dayConsts, endRowLine } from 'CalendarPage/constants'
 
 const date = dayjs('2020-01-01')
 
-const timesArray = [...Array(dayConsts.hours)].map((e, i) =>
-	date.add(i, 'hour')
-)
+const timesArray = [
+	...Array(dayConsts.hours * dayConsts.slotsPerHour),
+].map((e, i) => date.add(i, 'hour'))
 
 const timesForGrid = timesArray.map(timeObj => {
-	const formattedHour = timeObj.format(cssGridTimeFormat)
+	const formattedHour = timeObj.format(formats.cssGridTime)
 
 	return `[${formattedHour}] 1fr`
 })
@@ -38,14 +35,25 @@ const Container = styled.div`
 	}
 `
 
-const TestShift = styled.div`
-	grid-column: cell-start / cell-end;
-	grid-row: _07_00 / _23_00;
-	height: 100%;
-	width: 100%;
-	background-color: lightcoral;
-	opacity: 0.5;
-`
+type EventObj = {
+	start: Dayjs
+	end: Dayjs
+	title: string
+}
+type EventsList = EventObj[]
+
+const events: EventsList = [
+	{
+		start: dayjs('2020-01-01 01:00'),
+		end: dayjs('2020-01-01 03:00'),
+		title: 'Sleeping',
+	},
+	{
+		start: dayjs('2020-01-01 08:00'),
+		end: dayjs('2020-01-01 17:00'),
+		title: 'Working',
+	},
+]
 
 const CalendarPage: React.FC = () => (
 	<>
@@ -59,7 +67,12 @@ const CalendarPage: React.FC = () => (
 					<TimeBlock start={dayObj} />
 				</Fragment>
 			))}
-			<TestShift />
+			{events.map(event => (
+				<Event
+					key={event.start.format(formats.cssGridTime)}
+					event={event}
+				/>
+			))}
 		</Container>
 	</>
 )

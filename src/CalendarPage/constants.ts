@@ -9,3 +9,10 @@ export const dayConsts = {
 }
 
 export const endRowLine = 'END_LINE'
+
+type Formats = { [format: string]: string }
+
+export const formats: Formats = {
+	cssGridTime: '_HH_mm',
+	time: 'HH:mm',
+}
