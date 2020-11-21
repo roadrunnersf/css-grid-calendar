@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import { Dayjs } from 'dayjs'
 
 import { formats, endRowLine } from 'CalendarPage/constants'
+import { roundDateToNMinutes } from './utils'
 
 type CellProps = {
 	start: string
@@ -34,8 +35,8 @@ type EventProps = {
 }
 
 const Event: React.FC<EventProps> = ({ event: { start, end, title } }) => {
-	const startRow = start.format(formats.cssGridTime)
-	const provisionalEnd = end.format(formats.cssGridTime)
+	const startRow = roundDateToNMinutes(start).format(formats.cssGridTime)
+	const provisionalEnd = roundDateToNMinutes(end).format(formats.cssGridTime)
 
 	const endRow = provisionalEnd === '_00_00' ? endRowLine : provisionalEnd
 

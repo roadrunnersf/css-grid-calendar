@@ -2,7 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { Dayjs } from 'dayjs'
 
-import { formats, endRowLine } from 'CalendarPage/constants'
+import { formats, endRowLine, config } from 'CalendarPage/constants'
 
 type CellProps = {
 	start: string
@@ -16,6 +16,7 @@ const Cell = styled.div<CellProps>`
 	width: 100%;
 	background-color: ${p => p.theme.background};
 	border: 1px solid ${p => p.theme.tertiary};
+	border-top: none;
 	display: flex;
 	align-items: flex-start;
 	font-size: 14px;
@@ -25,7 +26,9 @@ type TimeBlockProps = { start: Dayjs }
 
 const TimeBlock: React.FC<TimeBlockProps> = ({ start }) => {
 	const startRow = start.format(formats.cssGridTime)
-	const provisionalEnd = start.add(1, 'hour').format(formats.cssGridTime)
+	const provisionalEnd = start
+		.add(1 / config.timeBlocksPerHour, 'hour')
+		.format(formats.cssGridTime)
 
 	const endRow = provisionalEnd === '_00_00' ? endRowLine : provisionalEnd
 

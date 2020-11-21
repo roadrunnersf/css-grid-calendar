@@ -1,20 +1,18 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
 import dayjs, { Dayjs } from 'dayjs'
 
-import Label from 'CalendarPage/Label'
+import TimeLabel from 'CalendarPage/TimeLabel'
 import TimeBlock from 'CalendarPage/TimeBlock'
 import Event from 'CalendarPage/Event'
-import { formats, config, endRowLine } from 'CalendarPage/constants'
+import { formats, config, cssGridTimeFormat } from 'CalendarPage/constants'
 
-const { slotsArray, labelTimes } = config
-
-const gridTemplateRows = `${labelTimes.join(' ')} [${endRowLine}]`
+const { timeBlocksArray, timeLabelsArray, timeLabelGridTemplateRows } = config
 
 const Container = styled.div`
 	display: grid;
-	grid-template-columns: [label-start] 100px [label-end cell-start] 1fr [cell-end];
-	grid-template-rows: ${gridTemplateRows};
+	grid-template-columns: [timeLabel-start] 100px [timeLabel-end cell-start] 1fr [cell-end];
+	grid-template-rows: ${timeLabelGridTemplateRows};
 	height: 800px;
 	width: 500px;
 	background-color: aliceblue;
@@ -34,13 +32,18 @@ type EventsList = EventObj[]
 
 const events: EventsList = [
 	{
-		start: dayjs('2020-01-01 01:00'),
+		start: dayjs('2020-01-01 00:52'),
 		end: dayjs('2020-01-01 03:00'),
 		title: 'Sleeping',
 	},
 	{
-		start: dayjs('2020-01-01 08:00'),
-		end: dayjs('2020-01-01 17:00'),
+		start: dayjs('2020-01-01 08:15'),
+		end: dayjs('2020-01-01 17:45'),
+		title: 'Working',
+	},
+	{
+		start: dayjs('2020-01-01 23:00'),
+		end: dayjs('2020-01-01 23:59'),
 		title: 'Working',
 	},
 ]
@@ -51,11 +54,17 @@ const CalendarPage: React.FC = () => (
 			<h1>CSS Grid Calendar</h1>
 		</div>
 		<Container>
-			{slotsArray.map(dayObj => (
-				<Fragment key={dayObj.format('ha')}>
-					<Label start={dayObj} />
-					<TimeBlock start={dayObj} />
-				</Fragment>
+			{timeBlocksArray.map(dayObj => (
+				<TimeBlock
+					key={dayObj.format(cssGridTimeFormat)}
+					start={dayObj}
+				/>
+			))}
+			{timeLabelsArray.map(dayObj => (
+				<TimeLabel
+					key={dayObj.format(cssGridTimeFormat)}
+					start={dayObj}
+				/>
 			))}
 			{events.map(event => (
 				<Event
