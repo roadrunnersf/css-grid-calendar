@@ -5,7 +5,7 @@ import dayjs, { Dayjs } from 'dayjs'
 import TimeLabel from 'CalendarPage/TimeLabel'
 import TimeBlock from 'CalendarPage/TimeBlock'
 import Event from 'CalendarPage/Event'
-import { formats, config, cssGridTimeFormat } from 'CalendarPage/constants'
+import { formats, config, cssGridTimeFormat } from 'CalendarPage/config'
 
 const { timeBlocksArray, timeLabelsArray, timeLabelGridTemplateRows } = config
 

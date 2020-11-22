@@ -2,7 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { Dayjs } from 'dayjs'
 
-import { formats, endRowLine } from 'CalendarPage/constants'
+import { formats, endRowLine } from 'CalendarPage/config'
 import { roundDateToNMinutes } from './utils'
 
 type CellProps = {

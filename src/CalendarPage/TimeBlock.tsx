@@ -2,7 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { Dayjs } from 'dayjs'
 
-import { formats, endRowLine, config } from 'CalendarPage/constants'
+import { formats, endRowLine, config } from 'CalendarPage/config'
 
 type CellProps = {
 	start: string
