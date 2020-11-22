@@ -3,21 +3,21 @@ import styled from '@emotion/styled'
 import dayjs, { Dayjs } from 'dayjs'
 
 import TimeLabel from 'CalendarPage/TimeLabel'
-import TimeBlock from 'CalendarPage/TimeBlock'
+import TimeBlocks from 'CalendarPage/TimeBlocks'
 import Event from 'CalendarPage/Event'
-import { formats, config, cssGridTimeFormat } from 'CalendarPage/config'
+import HeadRow from 'CalendarPage/HeadRow'
+import { formats, config, cssGridTimeFormat, dates } from 'CalendarPage/config'
+import { generateGridTemplateColumns } from 'CalendarPage/utils'
 
-const { timeBlocksArray, timeLabelsArray, timeLabelGridTemplateRows } = config
+const { timeLabelsArray, timeLabelGridTemplateRows } = config
 
 const Container = styled.div`
 	display: grid;
-	grid-template-columns: [timeLabel-start] 100px [timeLabel-end cell-start] 1fr [cell-end];
-	grid-template-rows: ${timeLabelGridTemplateRows};
+	grid-template-columns: ${generateGridTemplateColumns(dates)};
+	grid-template-rows: ${`[headrow-start] auto [headrow-end ${timeLabelGridTemplateRows}`};
 	height: 800px;
-	width: 500px;
+	width: 1200px;
 	background-color: aliceblue;
-	border: 1px solid black;
-	border-radius: 4px;
 	&:hover {
 		background-color: azure;
 	}
@@ -32,18 +32,28 @@ type EventsList = EventObj[]
 
 const events: EventsList = [
 	{
-		start: dayjs('2020-01-01 00:52'),
-		end: dayjs('2020-01-01 03:00'),
+		start: dayjs('2020-11-22 00:52'),
+		end: dayjs('2020-11-22 03:00'),
 		title: 'Sleeping',
 	},
 	{
-		start: dayjs('2020-01-01 08:15'),
-		end: dayjs('2020-01-01 17:45'),
+		start: dayjs('2020-11-22 08:15'),
+		end: dayjs('2020-11-22 17:45'),
 		title: 'Working',
 	},
 	{
-		start: dayjs('2020-01-01 23:00'),
-		end: dayjs('2020-01-01 23:59'),
+		start: dayjs('2020-11-25 09:00'),
+		end: dayjs('2020-11-25 17:00'),
+		title: 'Working',
+	},
+	{
+		start: dayjs('2020-11-26 09:00'),
+		end: dayjs('2020-11-25 17:00'),
+		title: 'Working',
+	},
+	{
+		start: dayjs('2020-11-27 09:00'),
+		end: dayjs('2020-11-25 17:00'),
 		title: 'Working',
 	},
 ]
@@ -54,12 +64,8 @@ const CalendarPage: React.FC = () => (
 			<h1>CSS Grid Calendar</h1>
 		</div>
 		<Container>
-			{timeBlocksArray.map(dayObj => (
-				<TimeBlock
-					key={dayObj.format(cssGridTimeFormat)}
-					start={dayObj}
-				/>
-			))}
+			<HeadRow />
+			<TimeBlocks />
 			{timeLabelsArray.map(dayObj => (
 				<TimeLabel
 					key={dayObj.format(cssGridTimeFormat)}

@@ -10,7 +10,7 @@ type CellProps = {
 }
 
 const Cell = styled.div<CellProps>`
-	grid-column: timeLabel-start / timeLabel-end;
+	grid-column: labels-start / labels-end;
 	grid-row: ${p => `${p.start} / ${p.end}`};
 	height: 100%;
 	width: 100%;
@@ -21,6 +21,7 @@ const Cell = styled.div<CellProps>`
 	align-items: flex-start;
 	justify-content: flex-end;
 	padding: 4px;
+	padding-right: 12px;
 	font-size: 14px;
 `
 

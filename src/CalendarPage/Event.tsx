@@ -3,16 +3,24 @@ import styled from '@emotion/styled'
 import { Dayjs } from 'dayjs'
 
 import { formats, endRowLine } from 'CalendarPage/config'
-import { roundDateToNMinutes } from './utils'
+import {
+	gridColumnLinesFromDate,
+	roundDateToNMinutes,
+} from 'CalendarPage/utils'
 
 type CellProps = {
-	start: string
-	end: string
+	start: Dayjs
+	startRow: string
+	endRow: string
 }
 
 const Cell = styled.div<CellProps>`
-	grid-column: cell-start / cell-end;
-	grid-row: ${p => `${p.start} / ${p.end}`};
+	grid-column: ${p => {
+		const { startLine, endLine } = gridColumnLinesFromDate(p.start)
+
+		return `${startLine} / ${endLine}`
+	}};
+	grid-row: ${p => `${p.startRow} / ${p.endRow}`};
 	height: 100%;
 	width: 100%;
 	background-color: ${p => p.theme.primary};
@@ -45,7 +53,7 @@ const Event: React.FC<EventProps> = ({ event: { start, end, title } }) => {
 	)}`
 
 	return (
-		<Cell start={startRow} end={endRow}>
+		<Cell start={start} startRow={startRow} endRow={endRow}>
 			{title}
 			<br />
 			{timeDisplayed}

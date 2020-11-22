@@ -1,10 +1,24 @@
 import dayjs, { Dayjs } from 'dayjs'
 import { everyNFromArray } from './utils'
 
-export const cssGridTimeFormat = '_HH_mm'
+export const cssGridTimeFormat: string = '_HH_mm'
+export const cssGridDateFormat: string = '_YYYY_MM_DD'
+
+export const standardDateFormat: string = 'YYYY-MM-DD'
+
 export const endRowLine = 'END_LINE'
 
-const date = dayjs().startOf('day')
+export const dates = [
+	dayjs('2020-11-22'),
+	dayjs('2020-11-23'),
+	dayjs('2020-11-24'),
+	dayjs('2020-11-25'),
+	dayjs('2020-11-26'),
+	dayjs('2020-11-27'),
+	dayjs('2020-11-28'),
+]
+
+export const startDate = dates[0].startOf('day')
 
 type Config = {
 	hours: number
@@ -33,7 +47,7 @@ export const config: Config = {
 	},
 	get slotsArray() {
 		return [...Array(config.numberOfSlots)].map((e, i) =>
-			date.add(i * config.hoursDifferenceBetweenSlots, 'hour')
+			startDate.add(i * config.hoursDifferenceBetweenSlots, 'hour')
 		)
 	},
 	get timeBlocksArray() {
@@ -58,7 +72,10 @@ export const config: Config = {
 		})
 	},
 	get timeLabelGridTemplateRows() {
-		return `${this.slotTimes.join(' ')} [${endRowLine}]`
+		const joined = `${this.slotTimes.join(' ')} [${endRowLine}]`
+		const removedFirstBracket = joined.substring(1)
+
+		return removedFirstBracket
 	},
 }
 

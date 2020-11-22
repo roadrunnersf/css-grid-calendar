@@ -1,6 +1,9 @@
 import dayjs, { Dayjs } from 'dayjs'
 
-const roundDateToNMinutes = (date: Dayjs, roundToMinutes: number = 5) => {
+const roundDateToNMinutes = (
+	date: Dayjs,
+	roundToMinutes: number = 5
+): Dayjs => {
 	const msInNMinutes = roundToMinutes * 60 * 1000
 
 	const timeStamp = dayjs(date).valueOf()
