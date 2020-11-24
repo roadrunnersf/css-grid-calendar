@@ -1,5 +1,5 @@
 import dayjs, { Dayjs } from 'dayjs'
-import { everyNFromArray } from './utils'
+import { everyNFromArray } from 'CalendarPage/utils'
 
 export const cssGridTimeFormat: string = '_HH_mm'
 export const cssGridDateFormat: string = '_YYYY_MM_DD'
@@ -21,7 +21,7 @@ export const dates = [
 export const startDate = dates[0].startOf('day')
 
 type Config = {
-	hours: number
+	hoursPerDay: number
 	slotsPerHour: 12
 	timeBlocksPerHour: 0.25 | 0.5 | 1 | 2 | 4
 	timeLabelsPerHour: 0.25 | 0.5 | 1
@@ -35,7 +35,7 @@ type Config = {
 }
 
 export const config: Config = {
-	hours: 24,
+	hoursPerDay: 24,
 	slotsPerHour: 12,
 	timeBlocksPerHour: 2,
 	timeLabelsPerHour: 1,
@@ -43,11 +43,11 @@ export const config: Config = {
 		return 1 / this.slotsPerHour
 	},
 	get numberOfSlots() {
-		return this.hours * this.slotsPerHour
+		return this.hoursPerDay * this.slotsPerHour
 	},
 	get slotsArray() {
-		return [...Array(config.numberOfSlots)].map((e, i) =>
-			startDate.add(i * config.hoursDifferenceBetweenSlots, 'hour')
+		return [...Array(this.numberOfSlots)].map((e, i) =>
+			startDate.add(i * this.hoursDifferenceBetweenSlots, 'hour')
 		)
 	},
 	get timeBlocksArray() {
