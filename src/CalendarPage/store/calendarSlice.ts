@@ -4,6 +4,7 @@ import dayjs from 'dayjs'
 import { mockEvents } from './mockEvents'
 
 type Event = {
+	id: number | string
 	start: string
 	end: string
 	title: string

@@ -58,7 +58,7 @@ const CalendarPage: React.FC = () => {
 					<TimeLabel key={date} start={date} />
 				))}
 				{eventsShown.map(event => (
-					<Event key={event.start} event={event} />
+					<Event key={event.id} event={event} />
 				))}
 			</Container>
 		</>
