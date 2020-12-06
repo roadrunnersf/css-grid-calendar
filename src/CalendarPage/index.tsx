@@ -7,7 +7,7 @@ import TimeLabel from 'CalendarPage/TimeLabel'
 import TimeBlocks from 'CalendarPage/TimeBlocks'
 import Event from 'CalendarPage/Event'
 import HeadRow from 'CalendarPage/HeadRow'
-import { formats, cssGridTimeFormat, dates } from 'CalendarPage/config'
+import { formats, dates } from 'CalendarPage/config'
 import { generateGridTemplateColumns } from 'CalendarPage/utils'
 import {
 	selectTimeLabelsArray,
@@ -80,7 +80,7 @@ const CalendarPage: React.FC = () => {
 				<TimeBlocks />
 				{timeLabelsArray.map(dayObj => (
 					<TimeLabel
-						key={dayObj.format(cssGridTimeFormat)}
+						key={dayObj.format(formats.cssGridTime)}
 						start={dayObj}
 					/>
 				))}

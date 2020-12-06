@@ -1,11 +1,6 @@
 import dayjs, { Dayjs } from 'dayjs'
 import { everyNFromArray } from 'CalendarPage/utils'
 
-export const cssGridTimeFormat: string = '_HH_mm'
-export const cssGridDateFormat: string = '_YYYY_MM_DD'
-
-export const standardDateFormat: string = 'YYYY-MM-DD'
-
 export const endRowLine = 'END_LINE'
 
 export const dates = [
@@ -83,6 +78,7 @@ type Formats = { [format: string]: string }
 
 export const formats: Formats = {
 	cssGridTime: '_HH_mm',
+	cssGridDate: '_YYYY_MM_DD',
 	time: 'HH:mm',
 	standardDate: 'YYYY-MM-DD',
 	isoShort: 'YYYY-MM-DDTHH:mm:ss',
