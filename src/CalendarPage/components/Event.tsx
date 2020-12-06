@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
+import { Typography } from '@material-ui/core'
 import dayjs from 'dayjs'
 
 import { formats, endRowLine } from 'CalendarPage/config'
@@ -26,8 +27,6 @@ const Cell = styled.div<CellProps>`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	text-align: center;
-	font-size: 14px;
 	opacity: 0.85;
 `
 
@@ -62,9 +61,8 @@ const Event: React.FC<EventProps> = ({ event: { start, end, title } }) => {
 			startRow={startRow}
 			endRow={endRow}
 		>
-			{title}
-			<br />
-			{timeDisplayed}
+			<Typography>{title}</Typography>
+			<Typography>{timeDisplayed}</Typography>
 		</Cell>
 	)
 }
