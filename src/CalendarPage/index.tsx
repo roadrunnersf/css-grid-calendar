@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from '@emotion/styled'
+import { Typography } from '@material-ui/core'
 
 import Pagination from 'CalendarPage/components/Pagination'
 import TimeLabel from 'CalendarPage/components/TimeLabel'
@@ -45,7 +46,9 @@ const CalendarPage: React.FC = () => {
 	return (
 		<>
 			<div>
-				<h1>CSS Grid Calendar</h1>
+				<Typography variant="h4" component="h1">
+					CSS Grid Calendar
+				</Typography>
 			</div>
 			<Pagination />
 			<Container

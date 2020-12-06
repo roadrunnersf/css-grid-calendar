@@ -41,6 +41,19 @@ export const selectEndDate = createSelector(
 			.add(numberOfDaysToShow - 1, 'day')
 			.toISOString()
 )
+export const selectDoesCalendarIncludeToday = createSelector(
+	selectStartDate,
+	selectEndDate,
+
+	(startDate, endDate): boolean => {
+		const today = dayjs()
+
+		return (
+			today.isSameOrAfter(dayjs(startDate).startOf('day')) &&
+			today.isSameOrBefore(dayjs(endDate).endOf('day'))
+		)
+	}
+)
 
 export const selectDatesShown = createSelector(
 	selectStartDate,

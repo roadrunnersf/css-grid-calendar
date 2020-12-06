@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from '@emotion/styled'
+import { Typography } from '@material-ui/core'
 import dayjs from 'dayjs'
 
 import { formats, endRowLine } from 'CalendarPage/config'
@@ -41,7 +42,9 @@ const TimeLabel: React.FC<TimeLabelProps> = ({ start }) => {
 
 	return (
 		<Cell start={startRow} end={endRow}>
-			{dayjs(start).format('ha')}
+			<Typography component="span">
+				{dayjs(start).format('ha')}
+			</Typography>
 		</Cell>
 	)
 }

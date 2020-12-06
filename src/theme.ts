@@ -1,3 +1,13 @@
+import { createMuiTheme } from '@material-ui/core'
+
+export const muiTheme = createMuiTheme({
+	props: {
+		MuiTypography: {
+			variant: 'body2',
+		},
+	},
+})
+
 interface ThemeColorScheme {
 	primary: string
 	secondary: string

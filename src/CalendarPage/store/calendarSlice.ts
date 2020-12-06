@@ -28,7 +28,7 @@ const initialState: CalendarState = {
 	timeBlocksPerHour: 2,
 	timeLabelsPerHour: 1,
 
-	startDate: dayjs().startOf('day').toISOString(),
+	startDate: dayjs().startOf('week').toISOString(),
 	numberOfDaysToShow: 7,
 	events: mockEvents,
 }
