@@ -31,7 +31,7 @@ type Config = {
 	timeBlocksArray: Dayjs[]
 	timeLabelsArray: Dayjs[]
 	slotTimes: string[]
-	timeLabelGridTemplateRows: string
+	slotGridTemplateRows: string
 }
 
 export const config: Config = {
@@ -71,7 +71,7 @@ export const config: Config = {
 			return `[${formattedHour}] 1fr`
 		})
 	},
-	get timeLabelGridTemplateRows() {
+	get slotGridTemplateRows() {
 		const joined = `${this.slotTimes.join(' ')} [${endRowLine}]`
 		const removedFirstBracket = joined.substring(1)
 
@@ -84,4 +84,6 @@ type Formats = { [format: string]: string }
 export const formats: Formats = {
 	cssGridTime: '_HH_mm',
 	time: 'HH:mm',
+	standardDate: 'YYYY-MM-DD',
+	isoShort: 'YYYY-MM-DDTHH:mm:ss',
 }

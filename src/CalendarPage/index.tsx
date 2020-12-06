@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import styled from '@emotion/styled'
 import dayjs, { Dayjs } from 'dayjs'
 
@@ -6,15 +7,22 @@ import TimeLabel from 'CalendarPage/TimeLabel'
 import TimeBlocks from 'CalendarPage/TimeBlocks'
 import Event from 'CalendarPage/Event'
 import HeadRow from 'CalendarPage/HeadRow'
-import { formats, config, cssGridTimeFormat, dates } from 'CalendarPage/config'
+import { formats, cssGridTimeFormat, dates } from 'CalendarPage/config'
 import { generateGridTemplateColumns } from 'CalendarPage/utils'
+import {
+	selectTimeLabelsArray,
+	selectSlotGridTemplateRows,
+} from './store/selectors'
 
-const { timeLabelsArray, timeLabelGridTemplateRows } = config
+type ContainerProps = {
+	slotGridTemplateRows: string
+}
 
-const Container = styled.div`
+const Container = styled.div<ContainerProps>`
 	display: grid;
 	grid-template-columns: ${generateGridTemplateColumns(dates)};
-	grid-template-rows: ${`[headrow-start] auto [headrow-end ${timeLabelGridTemplateRows}`};
+	grid-template-rows: ${p =>
+		`[headrow-start] auto [headrow-end ${p.slotGridTemplateRows}`};
 	height: 800px;
 	width: 1200px;
 	background-color: aliceblue;
@@ -58,28 +66,33 @@ const events: EventsList = [
 	},
 ]
 
-const CalendarPage: React.FC = () => (
-	<>
-		<div>
-			<h1>CSS Grid Calendar</h1>
-		</div>
-		<Container>
-			<HeadRow />
-			<TimeBlocks />
-			{timeLabelsArray.map(dayObj => (
-				<TimeLabel
-					key={dayObj.format(cssGridTimeFormat)}
-					start={dayObj}
-				/>
-			))}
-			{events.map(event => (
-				<Event
-					key={event.start.format(formats.cssGridTime)}
-					event={event}
-				/>
-			))}
-		</Container>
-	</>
-)
+const CalendarPage: React.FC = () => {
+	const timeLabelsArray = useSelector(selectTimeLabelsArray)
+	const slotGridTemplateRows = useSelector(selectSlotGridTemplateRows)
+
+	return (
+		<>
+			<div>
+				<h1>CSS Grid Calendar</h1>
+			</div>
+			<Container slotGridTemplateRows={slotGridTemplateRows}>
+				<HeadRow />
+				<TimeBlocks />
+				{timeLabelsArray.map(dayObj => (
+					<TimeLabel
+						key={dayObj.format(cssGridTimeFormat)}
+						start={dayObj}
+					/>
+				))}
+				{events.map(event => (
+					<Event
+						key={event.start.format(formats.isoShort)}
+						event={event}
+					/>
+				))}
+			</Container>
+		</>
+	)
+}
 
 export default CalendarPage
