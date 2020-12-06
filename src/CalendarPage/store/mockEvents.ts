@@ -2,33 +2,33 @@ import { Events } from './calendarSlice'
 
 export const mockEvents: Events = [
 	{
-		start: '2020-11-22 00:52',
-		end: '2020-11-22 03:00',
-		title: 'Sleeping',
+		start: '2020-12-12 15:00',
+		end: '2020-12-12 17:00',
+		title: 'At the park',
 	},
 	{
-		start: '2020-11-22 08:15',
-		end: '2020-11-22 17:45',
+		start: '2020-12-07 09:00',
+		end: '2020-12-07 17:00',
 		title: 'Working',
 	},
 	{
-		start: '2020-11-25 09:00',
-		end: '2020-11-25 17:00',
+		start: '2020-12-08 09:00',
+		end: '2020-12-08 17:00',
 		title: 'Working',
 	},
 	{
-		start: '2020-11-26 09:00',
-		end: '2020-11-26 17:00',
+		start: '2020-12-09 09:00',
+		end: '2020-12-09 17:00',
 		title: 'Working',
 	},
 	{
-		start: '2020-11-27 09:00',
-		end: '2020-11-27 17:00',
+		start: '2020-12-10 09:00',
+		end: '2020-12-10 17:00',
 		title: 'Working',
 	},
 	{
-		start: '2022-11-23 09:00',
-		end: '2022-11-23 17:00',
+		start: '2020-12-14 09:00',
+		end: '2020-12-14 17:00',
 		title: 'Working',
 	},
 ]

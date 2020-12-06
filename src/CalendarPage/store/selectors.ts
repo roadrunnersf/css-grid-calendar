@@ -32,6 +32,16 @@ export const selectTimeBlocksPerHour = (state: State) =>
 export const selectTimeLabelsPerHour = (state: State) =>
 	selectCalendar(state).timeLabelsPerHour
 
+export const selectEndDate = createSelector(
+	selectStartDate,
+	selectNumberOfDaysToShow,
+
+	(startDate, numberOfDaysToShow): string =>
+		dayjs(startDate)
+			.add(numberOfDaysToShow - 1, 'day')
+			.toISOString()
+)
+
 export const selectDatesShown = createSelector(
 	selectStartDate,
 	selectNumberOfDaysToShow,
@@ -69,12 +79,15 @@ export const selectSlotsArray = createSelector(
 		numberOfSlots: number,
 		startDate: string,
 		hoursDifferenceBetweenSlots: number
-	): string[] =>
-		[...Array(numberOfSlots)].map((e, i) =>
-			dayjs(startDate)
+	): string[] => {
+		const startOfStartDate = dayjs(startDate).startOf('day')
+
+		return [...Array(numberOfSlots)].map((e, i) =>
+			startOfStartDate
 				.add(i * hoursDifferenceBetweenSlots, 'hour')
 				.toISOString()
 		)
+	}
 )
 
 export const selectTimeBlocksArray = createSelector(
@@ -129,11 +142,12 @@ export const selectSlotGridTemplateRows = createSelector(
 
 export const selectEventsShown = createSelector(
 	selectEvents,
-	selectDatesShown,
+	selectStartDate,
+	selectEndDate,
 
-	(events, datesShown): Events => {
-		const earliestStart = dayjs(datesShown[0]).startOf('day')
-		const latestEnd = dayjs(datesShown.slice(-1)[0]).endOf('day')
+	(events, startDate, endDate): Events => {
+		const earliestStart = dayjs(startDate).startOf('day')
+		const latestEnd = dayjs(endDate).endOf('day')
 
 		return events.filter(
 			event =>

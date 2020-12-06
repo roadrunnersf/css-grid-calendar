@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
+import dayjs from 'dayjs'
+
 import { mockEvents } from './mockEvents'
 
 type Event = {
@@ -25,7 +27,7 @@ const initialState: CalendarState = {
 	timeBlocksPerHour: 2,
 	timeLabelsPerHour: 1,
 
-	startDate: '2020-11-22',
+	startDate: dayjs().startOf('day').toISOString(),
 	numberOfDaysToShow: 7,
 	events: mockEvents,
 }
@@ -33,9 +35,26 @@ const initialState: CalendarState = {
 const calendarSlice = createSlice({
 	name: 'calendar',
 	initialState,
-	reducers: {},
+	reducers: {
+		paginateBack(state) {
+			state.startDate = dayjs(state.startDate)
+				.subtract(state.numberOfDaysToShow, 'day')
+				.toISOString()
+		},
+		paginateForward(state) {
+			state.startDate = dayjs(state.startDate)
+				.add(state.numberOfDaysToShow, 'day')
+				.toISOString()
+		},
+		paginateToToday(state) {
+			state.startDate = dayjs().startOf('week').toISOString()
+		},
+	},
 })
 
-export const { reducer: calendarReducer } = calendarSlice
+export const {
+	reducer: calendarReducer,
+	actions: { paginateBack, paginateForward, paginateToToday },
+} = calendarSlice
 
 export default calendarSlice

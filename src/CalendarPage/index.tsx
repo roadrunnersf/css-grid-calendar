@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from '@emotion/styled'
 
+import Pagination from 'CalendarPage/components/Pagination'
 import TimeLabel from 'CalendarPage/components/TimeLabel'
 import TimeBlocks from 'CalendarPage/components/TimeBlocks'
 import Event from 'CalendarPage/components/Event'
@@ -24,12 +25,13 @@ const Container = styled.div<ContainerProps>`
 	grid-template-columns: ${p => generateGridTemplateColumns(p.datesShown)};
 	grid-template-rows: ${p =>
 		`[headrow-start] auto [headrow-end ${p.slotGridTemplateRows}`};
-	height: 800px;
+	height: 750px;
 	width: 1200px;
 	background-color: aliceblue;
 	&:hover {
 		background-color: azure;
 	}
+	margin-bottom: 16px;
 `
 
 const CalendarPage: React.FC = () => {
@@ -45,6 +47,7 @@ const CalendarPage: React.FC = () => {
 			<div>
 				<h1>CSS Grid Calendar</h1>
 			</div>
+			<Pagination />
 			<Container
 				datesShown={datesShown}
 				slotGridTemplateRows={slotGridTemplateRows}

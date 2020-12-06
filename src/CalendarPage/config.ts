@@ -8,4 +8,5 @@ export const formats: Formats = {
 	time: 'HH:mm',
 	standardDate: 'YYYY-MM-DD',
 	isoShort: 'YYYY-MM-DDTHH:mm:ss',
+	ukDate: 'DD/MM/YYYY',
 }
