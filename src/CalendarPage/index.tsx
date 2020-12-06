@@ -11,6 +11,7 @@ import {
 	selectTimeLabelsArray,
 	selectSlotGridTemplateRows,
 	selectDatesShown,
+	selectEvents,
 } from 'CalendarPage/store/selectors'
 
 type ContainerProps = {
@@ -31,51 +32,13 @@ const Container = styled.div<ContainerProps>`
 	}
 `
 
-type EventObj = {
-	start: string
-	end: string
-	title: string
-}
-type EventsList = EventObj[]
-
-const events: EventsList = [
-	{
-		start: '2020-11-22 00:52',
-		end: '2020-11-22 03:00',
-		title: 'Sleeping',
-	},
-	{
-		start: '2020-11-22 08:15',
-		end: '2020-11-22 17:45',
-		title: 'Working',
-	},
-	{
-		start: '2020-11-25 09:00',
-		end: '2020-11-25 17:00',
-		title: 'Working',
-	},
-	{
-		start: '2020-11-26 09:00',
-		end: '2020-11-26 17:00',
-		title: 'Working',
-	},
-	{
-		start: '2020-11-27 09:00',
-		end: '2020-11-27 17:00',
-		title: 'Working',
-	},
-	// {
-	// 	start: '2022-11-27 09:00',
-	// 	end: '2020-11-25 17:00',
-	// 	title: 'Working',
-	// },
-]
-
 const CalendarPage: React.FC = () => {
 	const timeLabelsArray = useSelector(selectTimeLabelsArray)
 	const slotGridTemplateRows = useSelector(selectSlotGridTemplateRows)
 
 	const datesShown = useSelector(selectDatesShown)
+
+	const events = useSelector(selectEvents)
 
 	return (
 		<>

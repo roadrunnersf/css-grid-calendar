@@ -8,6 +8,8 @@ export const selectCalendar = (state: State) => state.calendar
 
 export const selectStartDate = (state: State) => selectCalendar(state).startDate
 
+export const selectEvents = (state: State) => selectCalendar(state).events
+
 export const selectNumberOfDaysToShow = (state: State) =>
 	selectCalendar(state).numberOfDaysToShow
 

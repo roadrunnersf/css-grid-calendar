@@ -1,4 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { mockEvents } from './mockEvents'
+
+type Event = {
+	start: string
+	end: string
+	title: string
+}
+export type Events = Event[]
 
 export type CalendarState = {
 	hoursPerDay: number
@@ -8,6 +16,7 @@ export type CalendarState = {
 
 	startDate: string
 	numberOfDaysToShow: number
+	events: Events
 }
 
 const initialState: CalendarState = {
@@ -18,6 +27,7 @@ const initialState: CalendarState = {
 
 	startDate: '2020-11-22',
 	numberOfDaysToShow: 7,
+	events: mockEvents,
 }
 
 const calendarSlice = createSlice({
