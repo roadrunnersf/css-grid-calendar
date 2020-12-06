@@ -1,16 +1,19 @@
 import React, { Fragment } from 'react'
 import { useSelector } from 'react-redux'
 
-import { dates } from 'CalendarPage/config'
 import TimeBlock from 'CalendarPage/TimeBlock'
-import { selectTimeBlocksArray } from 'CalendarPage/store/selectors'
+import {
+	selectTimeBlocksArray,
+	selectDatesShown,
+} from 'CalendarPage/store/selectors'
 
 const TimeBlocks: React.FC = () => {
 	const timeBlocksArray = useSelector(selectTimeBlocksArray)
+	const datesShown = useSelector(selectDatesShown)
 
 	return (
 		<>
-			{dates.map(date => (
+			{datesShown.map(date => (
 				<Fragment key={date}>
 					{timeBlocksArray.map(timeOnDate => (
 						<TimeBlock

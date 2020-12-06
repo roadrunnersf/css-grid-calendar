@@ -8,6 +8,9 @@ export const selectCalendar = (state: State) => state.calendar
 
 export const selectStartDate = (state: State) => selectCalendar(state).startDate
 
+export const selectNumberOfDaysToShow = (state: State) =>
+	selectCalendar(state).numberOfDaysToShow
+
 export const selectHoursPerDay = (state: State) =>
 	selectCalendar(state).hoursPerDay
 
@@ -20,11 +23,27 @@ export const selectTimeBlocksPerHour = (state: State) =>
 export const selectTimeLabelsPerHour = (state: State) =>
 	selectCalendar(state).timeLabelsPerHour
 
+export const selectDatesShown = createSelector(
+	selectStartDate,
+	selectNumberOfDaysToShow,
+
+	(startDate, numberOfDaysToShow): string[] => {
+		const datesShown = [dayjs(startDate).toISOString()]
+
+		for (let i = 1; i < numberOfDaysToShow; i++) {
+			datesShown.push(dayjs(startDate).add(i, 'day').toISOString())
+		}
+
+		return datesShown
+	}
+)
+
 export const selectHoursDifferenceBetweenSlots = createSelector(
 	selectSlotsPerHour,
 
 	(slotsPerHour): number => 1 / slotsPerHour
 )
+
 export const selectNumberOfSlots = createSelector(
 	selectSlotsPerHour,
 	selectHoursPerDay,

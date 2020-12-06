@@ -7,6 +7,7 @@ export type CalendarState = {
 	timeLabelsPerHour: 0.25 | 0.5 | 1
 
 	startDate: string
+	numberOfDaysToShow: number
 }
 
 const initialState: CalendarState = {
@@ -16,6 +17,7 @@ const initialState: CalendarState = {
 	timeLabelsPerHour: 1,
 
 	startDate: '2020-11-22',
+	numberOfDaysToShow: 7,
 }
 
 const calendarSlice = createSlice({

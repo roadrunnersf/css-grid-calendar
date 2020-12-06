@@ -1,8 +1,9 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import styled from '@emotion/styled'
 
 import DateLabel from 'CalendarPage/DateLabel'
-import { dates } from 'CalendarPage/config'
+import { selectDatesShown } from 'CalendarPage/store/selectors'
 
 const EmptyCell = styled.div`
 	grid-column: labels-start / labels-end;
@@ -15,10 +16,12 @@ const EmptyCell = styled.div`
 `
 
 const HeadRow: React.FC = () => {
+	const datesShown = useSelector(selectDatesShown)
+
 	return (
 		<>
 			<EmptyCell />
-			{dates.map(date => (
+			{datesShown.map(date => (
 				<DateLabel key={date} date={date} />
 			))}
 		</>
