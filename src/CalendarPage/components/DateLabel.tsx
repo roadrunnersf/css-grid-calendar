@@ -32,15 +32,19 @@ const Cell = styled.div<CellProps>`
 type DateLabelProps = { date: string }
 
 const DateLabel: React.FC<DateLabelProps> = ({ date }) => {
-	const isToday = dayjs(date).isSame(dayjs(), 'day')
+	const dateObj = dayjs(date)
+
+	const isToday = dateObj.isSame(dayjs(), 'day')
 
 	return (
 		<Cell date={date} isToday={isToday}>
 			<Typography variant="body1" component="span">
-				{dayjs(date).format('dddd')}
+				{dateObj.format('dddd')}
 			</Typography>
 			<Typography variant="h5" component="span">
-				{dayjs(date).format('D')}
+				{dateObj.format('D') === '1'
+					? `${dateObj.format('D')} ${dateObj.format('MMM')}`
+					: dateObj.format('D')}
 			</Typography>
 		</Cell>
 	)
