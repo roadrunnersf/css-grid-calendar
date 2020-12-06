@@ -1,11 +1,13 @@
 import React, { Fragment } from 'react'
+import { useSelector } from 'react-redux'
 
-import { config, dates, formats } from 'CalendarPage/config'
+import { dates, formats } from 'CalendarPage/config'
 import TimeBlock from 'CalendarPage/TimeBlock'
-
-const { timeBlocksArray } = config
+import { selectTimeBlocksArray } from 'CalendarPage/store/selectors'
 
 const TimeBlocks: React.FC = () => {
+	const timeBlocksArray = useSelector(selectTimeBlocksArray)
+
 	return (
 		<>
 			{dates.map(date => (

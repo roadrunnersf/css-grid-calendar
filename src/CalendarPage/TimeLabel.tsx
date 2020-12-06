@@ -1,8 +1,10 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import styled from '@emotion/styled'
 import { Dayjs } from 'dayjs'
 
-import { formats, endRowLine, config } from 'CalendarPage/config'
+import { formats, endRowLine } from 'CalendarPage/config'
+import { selectTimeLabelsPerHour } from './store/selectors'
 
 type CellProps = {
 	start: string
@@ -28,9 +30,11 @@ const Cell = styled.div<CellProps>`
 type TimeLabelProps = { start: Dayjs }
 
 const TimeLabel: React.FC<TimeLabelProps> = ({ start }) => {
+	const timeLabelsPerHour = useSelector(selectTimeLabelsPerHour)
+
 	const startRow = start.format(formats.cssGridTime)
 	const provisionalEnd = start
-		.add(1 / config.timeLabelsPerHour, 'hour')
+		.add(1 / timeLabelsPerHour, 'hour')
 		.format(formats.cssGridTime)
 
 	const endRow = provisionalEnd === '_00_00' ? endRowLine : provisionalEnd
