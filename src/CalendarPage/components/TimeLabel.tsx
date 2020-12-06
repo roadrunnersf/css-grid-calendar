@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 import dayjs from 'dayjs'
 
 import { formats, endRowLine } from 'CalendarPage/config'
-import { selectTimeLabelsPerHour } from './store/selectors'
+import { selectTimeLabelsPerHour } from 'CalendarPage/store/selectors'
 
 type CellProps = {
 	start: string

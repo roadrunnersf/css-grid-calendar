@@ -2,10 +2,10 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from '@emotion/styled'
 
-import TimeLabel from 'CalendarPage/TimeLabel'
-import TimeBlocks from 'CalendarPage/TimeBlocks'
-import Event from 'CalendarPage/Event'
-import HeadRow from 'CalendarPage/HeadRow'
+import TimeLabel from 'CalendarPage/components/TimeLabel'
+import TimeBlocks from 'CalendarPage/components/TimeBlocks'
+import Event from 'CalendarPage/components/Event'
+import HeadRow from 'CalendarPage/components/HeadRow'
 import { generateGridTemplateColumns } from 'CalendarPage/utils'
 import {
 	selectTimeLabelsArray,

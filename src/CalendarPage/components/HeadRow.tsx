@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from '@emotion/styled'
 
-import DateLabel from 'CalendarPage/DateLabel'
+import DateLabel from 'CalendarPage/components/DateLabel'
 import { selectDatesShown } from 'CalendarPage/store/selectors'
 
 const EmptyCell = styled.div`

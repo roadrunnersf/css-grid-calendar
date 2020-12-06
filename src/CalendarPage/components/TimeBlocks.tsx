@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { useSelector } from 'react-redux'
 
-import TimeBlock from 'CalendarPage/TimeBlock'
+import TimeBlock from 'CalendarPage/components/TimeBlock'
 import {
 	selectTimeBlocksArray,
 	selectDatesShown,
