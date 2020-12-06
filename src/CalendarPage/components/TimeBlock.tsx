@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 import dayjs from 'dayjs'
 
 import { selectTimeBlocksPerHour } from 'CalendarPage/store/selectors'
-import { formats, endRowLine } from 'CalendarPage/config'
+import { formats, lines } from 'CalendarPage/config'
 import { gridColumnLinesFromDate } from 'CalendarPage/utils'
 
 type CellProps = {
@@ -37,7 +37,7 @@ const TimeBlock: React.FC<TimeBlockProps> = ({ start, date }) => {
 		.add(1 / timeBlocksPerHour, 'hour')
 		.format(formats.cssGridTime)
 
-	const endRow = provisionalEnd === '_00_00' ? endRowLine : provisionalEnd
+	const endRow = provisionalEnd === '_00_00' ? lines.endRow : provisionalEnd
 
 	const { startCol, endCol } = gridColumnLinesFromDate(date)
 

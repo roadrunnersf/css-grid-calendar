@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 import { Typography } from '@material-ui/core'
 import dayjs from 'dayjs'
 
-import { formats, endRowLine } from 'CalendarPage/config'
+import { formats, lines } from 'CalendarPage/config'
 import { selectTimeLabelsPerHour } from 'CalendarPage/store/selectors'
 
 type CellProps = {
@@ -38,7 +38,7 @@ const TimeLabel: React.FC<TimeLabelProps> = ({ start }) => {
 		.add(1 / timeLabelsPerHour, 'hour')
 		.format(formats.cssGridTime)
 
-	const endRow = provisionalEnd === '_00_00' ? endRowLine : provisionalEnd
+	const endRow = provisionalEnd === '_00_00' ? lines.endRow : provisionalEnd
 
 	return (
 		<Cell start={startRow} end={endRow}>

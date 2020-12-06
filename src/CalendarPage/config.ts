@@ -1,6 +1,14 @@
-export const endRowLine = 'END_LINE'
+type Lines = {
+	[format: string]: string
+}
 
-type Formats = { [format: string]: string }
+export const lines: Lines = {
+	endRow: 'END_LINE',
+}
+
+type Formats = {
+	[format: string]: string
+}
 
 export const formats: Formats = {
 	cssGridTime: '_HH_mm',

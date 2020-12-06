@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import { Typography } from '@material-ui/core'
 import dayjs from 'dayjs'
 
-import { formats, endRowLine } from 'CalendarPage/config'
+import { formats, lines } from 'CalendarPage/config'
 import {
 	gridColumnLinesFromDate,
 	roundDateToNMinutes,
@@ -46,7 +46,7 @@ const Event: React.FC<EventProps> = ({ event: { start, end, title } }) => {
 		formats.cssGridTime
 	)
 
-	const endRow = provisionalEnd === '_00_00' ? endRowLine : provisionalEnd
+	const endRow = provisionalEnd === '_00_00' ? lines.endRow : provisionalEnd
 
 	const { startCol, endCol } = gridColumnLinesFromDate(start)
 

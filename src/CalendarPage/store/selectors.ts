@@ -5,7 +5,7 @@ import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
 import { createSelector } from 'reselect'
 
 import { everyNFromArray } from 'CalendarPage/utils'
-import { endRowLine, formats } from 'CalendarPage/config'
+import { formats, lines } from 'CalendarPage/config'
 import { Events } from './calendarSlice'
 
 dayjs.extend(isSameOrAfter)
@@ -146,7 +146,7 @@ export const selectSlotGridTemplateRows = createSelector(
 	selectSlotTimes,
 
 	(slotTimes): string => {
-		const joined = `${slotTimes.join(' ')} [${endRowLine}]`
+		const joined = `${slotTimes.join(' ')} [${lines.endRow}]`
 		const removedFirstBracket = joined.substring(1)
 
 		return removedFirstBracket
