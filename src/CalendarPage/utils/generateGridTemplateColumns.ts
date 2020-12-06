@@ -3,9 +3,9 @@ import gridColumnLinesFromDate from './gridColumnLinesFromDate'
 const generateGridTemplateColumns = (dates: string[]): string => {
 	const joined = dates
 		.map(date => {
-			const { startLine, endLine } = gridColumnLinesFromDate(date)
+			const { startCol, endCol } = gridColumnLinesFromDate(date)
 
-			return `${startLine} ] minmax(0, 1fr) [ ${endLine} `
+			return `${startCol} ] minmax(0, 1fr) [ ${endCol} `
 		})
 		.join('')
 

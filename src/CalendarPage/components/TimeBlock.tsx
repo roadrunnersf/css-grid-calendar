@@ -8,18 +8,15 @@ import { formats, endRowLine } from 'CalendarPage/config'
 import { gridColumnLinesFromDate } from 'CalendarPage/utils'
 
 type CellProps = {
-	start: string
-	end: string
-	date: string
+	startCol: string
+	endCol: string
+	startRow: string
+	endRow: string
 }
 
 const Cell = styled.div<CellProps>`
-	grid-column: ${p => {
-		const { startLine, endLine } = gridColumnLinesFromDate(p.date)
-
-		return `${startLine} / ${endLine}`
-	}};
-	grid-row: ${p => `${p.start} / ${p.end}`};
+	grid-column: ${p => `${p.startCol} / ${p.endCol}`};
+	grid-row: ${p => `${p.startRow} / ${p.endRow}`};
 	height: 100%;
 	width: 100%;
 	background-color: ${p => p.theme.background};
@@ -42,7 +39,16 @@ const TimeBlock: React.FC<TimeBlockProps> = ({ start, date }) => {
 
 	const endRow = provisionalEnd === '_00_00' ? endRowLine : provisionalEnd
 
-	return <Cell date={date} start={startRow} end={endRow} />
+	const { startCol, endCol } = gridColumnLinesFromDate(date)
+
+	return (
+		<Cell
+			startCol={startCol}
+			endCol={endCol}
+			startRow={startRow}
+			endRow={endRow}
+		/>
+	)
 }
 
 export default TimeBlock

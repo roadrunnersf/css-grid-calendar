@@ -9,17 +9,14 @@ import {
 } from 'CalendarPage/utils'
 
 type CellProps = {
-	start: string
+	startCol: string
+	endCol: string
 	startRow: string
 	endRow: string
 }
 
 const Cell = styled.div<CellProps>`
-	grid-column: ${p => {
-		const { startLine, endLine } = gridColumnLinesFromDate(p.start)
-
-		return `${startLine} / ${endLine}`
-	}};
+	grid-column: ${p => `${p.startCol} / ${p.endCol}`};
 	grid-row: ${p => `${p.startRow} / ${p.endRow}`};
 	height: 100%;
 	width: 100%;
@@ -52,12 +49,19 @@ const Event: React.FC<EventProps> = ({ event: { start, end, title } }) => {
 
 	const endRow = provisionalEnd === '_00_00' ? endRowLine : provisionalEnd
 
+	const { startCol, endCol } = gridColumnLinesFromDate(start)
+
 	const timeDisplayed = `${dayjs(start).format(formats.time)} - ${dayjs(
 		end
 	).format(formats.time)}`
 
 	return (
-		<Cell start={start} startRow={startRow} endRow={endRow}>
+		<Cell
+			startCol={startCol}
+			endCol={endCol}
+			startRow={startRow}
+			endRow={endRow}
+		>
 			{title}
 			<br />
 			{timeDisplayed}

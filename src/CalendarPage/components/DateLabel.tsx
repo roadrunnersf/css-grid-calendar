@@ -6,16 +6,13 @@ import { Typography } from '@material-ui/core'
 import { gridColumnLinesFromDate } from 'CalendarPage/utils'
 
 type CellProps = {
-	date: string
+	startCol: string
+	endCol: string
 	isToday: boolean
 }
 
 const Cell = styled.div<CellProps>`
-	grid-column: ${p => {
-		const { startLine, endLine } = gridColumnLinesFromDate(p.date)
-
-		return `${startLine} / ${endLine}`
-	}};
+	grid-column: ${p => `${p.startCol} / ${p.endCol}`};
 	grid-row: headrow-start / headrow-end;
 	height: 100%;
 	width: 100%;
@@ -36,8 +33,10 @@ const DateLabel: React.FC<DateLabelProps> = ({ date }) => {
 
 	const isToday = dateObj.isSame(dayjs(), 'day')
 
+	const { startCol, endCol } = gridColumnLinesFromDate(date)
+
 	return (
-		<Cell date={date} isToday={isToday}>
+		<Cell startCol={startCol} endCol={endCol} isToday={isToday}>
 			<Typography variant="body1" component="span">
 				{dateObj.format('dddd')}
 			</Typography>
