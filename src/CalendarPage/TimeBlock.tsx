@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from '@emotion/styled'
-import { Dayjs } from 'dayjs'
+import dayjs from 'dayjs'
 
 import { selectTimeBlocksPerHour } from 'CalendarPage/store/selectors'
 import { formats, endRowLine } from 'CalendarPage/config'
@@ -10,7 +10,7 @@ import { gridColumnLinesFromDate } from 'CalendarPage/utils'
 type CellProps = {
 	start: string
 	end: string
-	date: Dayjs
+	date: string
 }
 
 const Cell = styled.div<CellProps>`
@@ -30,13 +30,13 @@ const Cell = styled.div<CellProps>`
 	font-size: 14px;
 `
 
-type TimeBlockProps = { start: Dayjs; date: Dayjs }
+type TimeBlockProps = { start: string; date: string }
 
 const TimeBlock: React.FC<TimeBlockProps> = ({ start, date }) => {
 	const timeBlocksPerHour = useSelector(selectTimeBlocksPerHour)
 
-	const startRow = start.format(formats.cssGridTime)
-	const provisionalEnd = start
+	const startRow = dayjs(start).format(formats.cssGridTime)
+	const provisionalEnd = dayjs(start)
 		.add(1 / timeBlocksPerHour, 'hour')
 		.format(formats.cssGridTime)
 

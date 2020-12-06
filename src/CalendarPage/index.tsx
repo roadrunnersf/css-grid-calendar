@@ -1,13 +1,12 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from '@emotion/styled'
-import dayjs, { Dayjs } from 'dayjs'
 
 import TimeLabel from 'CalendarPage/TimeLabel'
 import TimeBlocks from 'CalendarPage/TimeBlocks'
 import Event from 'CalendarPage/Event'
 import HeadRow from 'CalendarPage/HeadRow'
-import { formats, dates } from 'CalendarPage/config'
+import { dates } from 'CalendarPage/config'
 import { generateGridTemplateColumns } from 'CalendarPage/utils'
 import {
 	selectTimeLabelsArray,
@@ -32,36 +31,36 @@ const Container = styled.div<ContainerProps>`
 `
 
 type EventObj = {
-	start: Dayjs
-	end: Dayjs
+	start: string
+	end: string
 	title: string
 }
 type EventsList = EventObj[]
 
 const events: EventsList = [
 	{
-		start: dayjs('2020-11-22 00:52'),
-		end: dayjs('2020-11-22 03:00'),
+		start: '2020-11-22 00:52',
+		end: '2020-11-22 03:00',
 		title: 'Sleeping',
 	},
 	{
-		start: dayjs('2020-11-22 08:15'),
-		end: dayjs('2020-11-22 17:45'),
+		start: '2020-11-22 08:15',
+		end: '2020-11-22 17:45',
 		title: 'Working',
 	},
 	{
-		start: dayjs('2020-11-25 09:00'),
-		end: dayjs('2020-11-25 17:00'),
+		start: '2020-11-25 09:00',
+		end: '2020-11-25 17:00',
 		title: 'Working',
 	},
 	{
-		start: dayjs('2020-11-26 09:00'),
-		end: dayjs('2020-11-25 17:00'),
+		start: '2020-11-26 09:00',
+		end: '2020-11-25 17:00',
 		title: 'Working',
 	},
 	{
-		start: dayjs('2020-11-27 09:00'),
-		end: dayjs('2020-11-25 17:00'),
+		start: '2020-11-27 09:00',
+		end: '2020-11-25 17:00',
 		title: 'Working',
 	},
 ]
@@ -78,17 +77,11 @@ const CalendarPage: React.FC = () => {
 			<Container slotGridTemplateRows={slotGridTemplateRows}>
 				<HeadRow />
 				<TimeBlocks />
-				{timeLabelsArray.map(dayObj => (
-					<TimeLabel
-						key={dayObj.format(formats.cssGridTime)}
-						start={dayObj}
-					/>
+				{timeLabelsArray.map(date => (
+					<TimeLabel key={date} start={date} />
 				))}
 				{events.map(event => (
-					<Event
-						key={event.start.format(formats.isoShort)}
-						event={event}
-					/>
+					<Event key={event.start} event={event} />
 				))}
 			</Container>
 		</>

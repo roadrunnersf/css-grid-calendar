@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { useSelector } from 'react-redux'
 
-import { dates, formats } from 'CalendarPage/config'
+import { dates } from 'CalendarPage/config'
 import TimeBlock from 'CalendarPage/TimeBlock'
 import { selectTimeBlocksArray } from 'CalendarPage/store/selectors'
 
@@ -11,11 +11,11 @@ const TimeBlocks: React.FC = () => {
 	return (
 		<>
 			{dates.map(date => (
-				<Fragment key={date.format('YYYY-MM-DD')}>
-					{timeBlocksArray.map(dayObj => (
+				<Fragment key={date}>
+					{timeBlocksArray.map(timeOnDate => (
 						<TimeBlock
-							key={dayObj.format(formats.cssGridTime)}
-							start={dayObj}
+							key={timeOnDate}
+							start={timeOnDate}
 							date={date}
 						/>
 					))}

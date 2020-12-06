@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from '@emotion/styled'
-import { Dayjs } from 'dayjs'
+import dayjs from 'dayjs'
 
 import { formats, endRowLine } from 'CalendarPage/config'
 import { selectTimeLabelsPerHour } from './store/selectors'
@@ -27,13 +27,13 @@ const Cell = styled.div<CellProps>`
 	font-size: 14px;
 `
 
-type TimeLabelProps = { start: Dayjs }
+type TimeLabelProps = { start: string }
 
 const TimeLabel: React.FC<TimeLabelProps> = ({ start }) => {
 	const timeLabelsPerHour = useSelector(selectTimeLabelsPerHour)
 
-	const startRow = start.format(formats.cssGridTime)
-	const provisionalEnd = start
+	const startRow = dayjs(start).format(formats.cssGridTime)
+	const provisionalEnd = dayjs(start)
 		.add(1 / timeLabelsPerHour, 'hour')
 		.format(formats.cssGridTime)
 
@@ -41,7 +41,7 @@ const TimeLabel: React.FC<TimeLabelProps> = ({ start }) => {
 
 	return (
 		<Cell start={startRow} end={endRow}>
-			{start.format('ha')}
+			{dayjs(start).format('ha')}
 		</Cell>
 	)
 }

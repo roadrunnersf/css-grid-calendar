@@ -2,7 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 
 import DateLabel from 'CalendarPage/DateLabel'
-import { dates, formats } from 'CalendarPage/config'
+import { dates } from 'CalendarPage/config'
 
 const EmptyCell = styled.div`
 	grid-column: labels-start / labels-end;
@@ -19,10 +19,7 @@ const HeadRow: React.FC = () => {
 		<>
 			<EmptyCell />
 			{dates.map(date => (
-				<DateLabel
-					key={date.format(formats.standardDate)}
-					date={date}
-				/>
+				<DateLabel key={date} date={date} />
 			))}
 		</>
 	)

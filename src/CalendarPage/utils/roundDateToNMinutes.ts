@@ -1,16 +1,16 @@
-import dayjs, { Dayjs } from 'dayjs'
+import dayjs from 'dayjs'
 
 const roundDateToNMinutes = (
-	date: Dayjs,
+	date: string,
 	roundToMinutes: number = 5
-): Dayjs => {
+): string => {
 	const msInNMinutes = roundToMinutes * 60 * 1000
 
 	const timeStamp = dayjs(date).valueOf()
 
 	const roundedTimeStamp = Math.round(timeStamp / msInNMinutes) * msInNMinutes
 
-	return dayjs(roundedTimeStamp)
+	return dayjs(roundedTimeStamp).toISOString()
 }
 
 export default roundDateToNMinutes

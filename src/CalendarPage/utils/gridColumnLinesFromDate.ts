@@ -1,4 +1,4 @@
-import { Dayjs } from 'dayjs'
+import dayjs from 'dayjs'
 import { formats } from 'CalendarPage/config'
 
 type GridColumnLines = {
@@ -6,8 +6,8 @@ type GridColumnLines = {
 	endLine: string
 }
 
-const gridColumnLinesFromDate = (date: Dayjs): GridColumnLines => {
-	const underscoreDate = date.format(formats.cssGridDate)
+const gridColumnLinesFromDate = (date: string): GridColumnLines => {
+	const underscoreDate = dayjs(date).format(formats.cssGridDate)
 
 	return {
 		startLine: `${underscoreDate}_start`,

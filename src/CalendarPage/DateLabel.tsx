@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { Dayjs } from 'dayjs'
+import dayjs from 'dayjs'
 
 import { P } from 'elements'
 import { gridColumnLinesFromDate } from 'CalendarPage/utils'
 
 type CellProps = {
-	date: Dayjs
+	date: string
 }
 
 const Cell = styled.div<CellProps>`
@@ -27,13 +27,13 @@ const Cell = styled.div<CellProps>`
 	justify-content: center;
 	text-align: center;
 `
-type DateLabelProps = { date: Dayjs }
+type DateLabelProps = { date: string }
 
 const DateLabel: React.FC<DateLabelProps> = ({ date }) => {
 	return (
 		<Cell date={date}>
-			<P>{date.format('dddd')}</P>
-			<P large>{date.format('D')}</P>
+			<P>{dayjs(date).format('dddd')}</P>
+			<P large>{dayjs(date).format('D')}</P>
 		</Cell>
 	)
 }

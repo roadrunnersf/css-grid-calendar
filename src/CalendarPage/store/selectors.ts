@@ -1,4 +1,4 @@
-import dayjs, { Dayjs } from 'dayjs'
+import dayjs from 'dayjs'
 import { createSelector } from 'reselect'
 
 import { everyNFromArray } from 'CalendarPage/utils'
@@ -41,9 +41,11 @@ export const selectSlotsArray = createSelector(
 		numberOfSlots: number,
 		startDate: string,
 		hoursDifferenceBetweenSlots: number
-	): Dayjs[] =>
+	): string[] =>
 		[...Array(numberOfSlots)].map((e, i) =>
-			dayjs(startDate).add(i * hoursDifferenceBetweenSlots, 'hour')
+			dayjs(startDate)
+				.add(i * hoursDifferenceBetweenSlots, 'hour')
+				.toISOString()
 		)
 )
 
@@ -52,7 +54,7 @@ export const selectTimeBlocksArray = createSelector(
 	selectTimeBlocksPerHour,
 	selectSlotsArray,
 
-	(slotsPerHour, timeBlocksPerHour, slotsArray): Dayjs[] => {
+	(slotsPerHour, timeBlocksPerHour, slotsArray): string[] => {
 		const every = slotsPerHour / timeBlocksPerHour
 
 		const filteredSlots = everyNFromArray(slotsArray, every)
@@ -66,7 +68,7 @@ export const selectTimeLabelsArray = createSelector(
 	selectTimeLabelsPerHour,
 	selectSlotsArray,
 
-	(slotsPerHour, timeLabelsPerHour, slotsArray): Dayjs[] => {
+	(slotsPerHour, timeLabelsPerHour, slotsArray): string[] => {
 		const every = slotsPerHour / timeLabelsPerHour
 
 		const filteredSlots = everyNFromArray(slotsArray, every)
@@ -80,7 +82,7 @@ export const selectSlotTimes = createSelector(
 
 	(slotsArray): string[] =>
 		slotsArray.map(timeObj => {
-			const formattedHour = timeObj.format(formats.cssGridTime)
+			const formattedHour = dayjs(timeObj).format(formats.cssGridTime)
 
 			return `[${formattedHour}] 1fr`
 		})

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { Dayjs } from 'dayjs'
+import dayjs from 'dayjs'
 
 import { formats, endRowLine } from 'CalendarPage/config'
 import {
@@ -9,7 +9,7 @@ import {
 } from 'CalendarPage/utils'
 
 type CellProps = {
-	start: Dayjs
+	start: string
 	startRow: string
 	endRow: string
 }
@@ -36,21 +36,25 @@ const Cell = styled.div<CellProps>`
 
 type EventProps = {
 	event: {
-		start: Dayjs
-		end: Dayjs
+		start: string
+		end: string
 		title: string
 	}
 }
 
 const Event: React.FC<EventProps> = ({ event: { start, end, title } }) => {
-	const startRow = roundDateToNMinutes(start).format(formats.cssGridTime)
-	const provisionalEnd = roundDateToNMinutes(end).format(formats.cssGridTime)
+	const startRow = dayjs(roundDateToNMinutes(start)).format(
+		formats.cssGridTime
+	)
+	const provisionalEnd = dayjs(roundDateToNMinutes(end)).format(
+		formats.cssGridTime
+	)
 
 	const endRow = provisionalEnd === '_00_00' ? endRowLine : provisionalEnd
 
-	const timeDisplayed = `${start.format(formats.time)} - ${end.format(
-		formats.time
-	)}`
+	const timeDisplayed = `${dayjs(start).format(formats.time)} - ${dayjs(
+		end
+	).format(formats.time)}`
 
 	return (
 		<Cell start={start} startRow={startRow} endRow={endRow}>
