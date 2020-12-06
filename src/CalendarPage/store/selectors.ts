@@ -146,7 +146,7 @@ export const selectSlotGridTemplateRows = createSelector(
 	selectSlotTimes,
 
 	(slotTimes): string => {
-		const joined = `${slotTimes.join(' ')} [${lines.endRow}]`
+		const joined = `${slotTimes.join(' ')} [${lines.rows.end}]`
 		const removedFirstBracket = joined.substring(1)
 
 		return removedFirstBracket

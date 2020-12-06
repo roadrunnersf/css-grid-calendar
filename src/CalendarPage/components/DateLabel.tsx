@@ -4,6 +4,7 @@ import dayjs from 'dayjs'
 import { Typography } from '@material-ui/core'
 
 import { gridColumnLinesFromDate } from 'CalendarPage/utils'
+import { lines } from 'CalendarPage/config'
 
 type CellProps = {
 	startCol: string
@@ -13,7 +14,7 @@ type CellProps = {
 
 const Cell = styled.div<CellProps>`
 	grid-column: ${p => `${p.startCol} / ${p.endCol}`};
-	grid-row: headrow-start / headrow-end;
+	grid-row: ${lines.rows.head.start} / ${lines.rows.head.end};
 	height: 100%;
 	width: 100%;
 	background-color: ${p => (p.isToday ? p.theme.primary : p.theme.secondary)};

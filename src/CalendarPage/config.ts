@@ -1,9 +1,32 @@
+type StartEndObj = {
+	start: string
+	end: string
+}
+
 type Lines = {
-	[format: string]: string
+	rows: {
+		end: string
+		head: StartEndObj
+	}
+	cols: {
+		labels: StartEndObj
+	}
 }
 
 export const lines: Lines = {
-	endRow: 'END_LINE',
+	rows: {
+		end: 'END_LINE',
+		head: {
+			start: 'headrow-start',
+			end: 'headrow-end',
+		},
+	},
+	cols: {
+		labels: {
+			start: 'labels-start',
+			end: 'labels-end',
+		},
+	},
 }
 
 type Formats = {

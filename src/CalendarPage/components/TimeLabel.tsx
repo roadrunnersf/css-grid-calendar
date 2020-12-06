@@ -13,7 +13,7 @@ type CellProps = {
 }
 
 const Cell = styled.div<CellProps>`
-	grid-column: labels-start / labels-end;
+	grid-column: ${lines.cols.labels.start} / ${lines.cols.labels.end};
 	grid-row: ${p => `${p.start} / ${p.end}`};
 	height: 100%;
 	width: 100%;
@@ -38,7 +38,7 @@ const TimeLabel: React.FC<TimeLabelProps> = ({ start }) => {
 		.add(1 / timeLabelsPerHour, 'hour')
 		.format(formats.cssGridTime)
 
-	const endRow = provisionalEnd === '_00_00' ? lines.endRow : provisionalEnd
+	const endRow = provisionalEnd === '_00_00' ? lines.rows.end : provisionalEnd
 
 	return (
 		<Cell start={startRow} end={endRow}>

@@ -37,7 +37,7 @@ const TimeBlock: React.FC<TimeBlockProps> = ({ start, date }) => {
 		.add(1 / timeBlocksPerHour, 'hour')
 		.format(formats.cssGridTime)
 
-	const endRow = provisionalEnd === '_00_00' ? lines.endRow : provisionalEnd
+	const endRow = provisionalEnd === '_00_00' ? lines.rows.end : provisionalEnd
 
 	const { startCol, endCol } = gridColumnLinesFromDate(date)
 

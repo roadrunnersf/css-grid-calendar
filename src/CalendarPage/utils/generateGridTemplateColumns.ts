@@ -1,4 +1,5 @@
 import gridColumnLinesFromDate from './gridColumnLinesFromDate'
+import { lines } from 'CalendarPage/config'
 
 const generateGridTemplateColumns = (dates: string[]): string => {
 	const joined = dates
@@ -9,7 +10,7 @@ const generateGridTemplateColumns = (dates: string[]): string => {
 		})
 		.join('')
 
-	return `[labels-start] 100px [labels-end ${joined}]`
+	return `[${lines.cols.labels.start}] 100px [${lines.cols.labels.end} ${joined}]`
 }
 
 export default generateGridTemplateColumns

@@ -5,9 +5,11 @@ import styled from '@emotion/styled'
 import DateLabel from 'CalendarPage/components/DateLabel'
 import { selectDatesShown } from 'CalendarPage/store/selectors'
 
+import { lines } from 'CalendarPage/config'
+
 const EmptyCell = styled.div`
-	grid-column: labels-start / labels-end;
-	grid-row: headrow-start / headrow-end;
+	grid-column: ${lines.cols.labels.start} / ${lines.cols.labels.end};
+	grid-row: ${lines.rows.head.start} / ${lines.rows.head.end};
 	height: 100%;
 	width: 100%;
 	background-color: ${p => p.theme.secondary};

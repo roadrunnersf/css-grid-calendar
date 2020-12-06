@@ -46,7 +46,7 @@ const Event: React.FC<EventProps> = ({ event: { start, end, title } }) => {
 		formats.cssGridTime
 	)
 
-	const endRow = provisionalEnd === '_00_00' ? lines.endRow : provisionalEnd
+	const endRow = provisionalEnd === '_00_00' ? lines.rows.end : provisionalEnd
 
 	const { startCol, endCol } = gridColumnLinesFromDate(start)
 
