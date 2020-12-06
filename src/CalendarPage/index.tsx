@@ -11,7 +11,7 @@ import {
 	selectTimeLabelsArray,
 	selectSlotGridTemplateRows,
 	selectDatesShown,
-	selectEvents,
+	selectEventsShown,
 } from 'CalendarPage/store/selectors'
 
 type ContainerProps = {
@@ -38,7 +38,7 @@ const CalendarPage: React.FC = () => {
 
 	const datesShown = useSelector(selectDatesShown)
 
-	const events = useSelector(selectEvents)
+	const eventsShown = useSelector(selectEventsShown)
 
 	return (
 		<>
@@ -54,7 +54,7 @@ const CalendarPage: React.FC = () => {
 				{timeLabelsArray.map(date => (
 					<TimeLabel key={date} start={date} />
 				))}
-				{events.map(event => (
+				{eventsShown.map(event => (
 					<Event key={event.start} event={event} />
 				))}
 			</Container>

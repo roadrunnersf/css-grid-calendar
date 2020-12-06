@@ -1,8 +1,15 @@
 import dayjs from 'dayjs'
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
+
 import { createSelector } from 'reselect'
 
 import { everyNFromArray } from 'CalendarPage/utils'
 import { endRowLine, formats } from 'CalendarPage/config'
+import { Events } from './calendarSlice'
+
+dayjs.extend(isSameOrAfter)
+dayjs.extend(isSameOrBefore)
 
 export const selectCalendar = (state: State) => state.calendar
 
@@ -117,5 +124,21 @@ export const selectSlotGridTemplateRows = createSelector(
 		const removedFirstBracket = joined.substring(1)
 
 		return removedFirstBracket
+	}
+)
+
+export const selectEventsShown = createSelector(
+	selectEvents,
+	selectDatesShown,
+
+	(events, datesShown): Events => {
+		const earliestStart = dayjs(datesShown[0]).startOf('day')
+		const latestEnd = dayjs(datesShown.slice(-1)[0]).endOf('day')
+
+		return events.filter(
+			event =>
+				dayjs(event.start).isSameOrAfter(earliestStart) &&
+				dayjs(event.end).isSameOrBefore(latestEnd)
+		)
 	}
 )
