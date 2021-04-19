@@ -70,24 +70,15 @@ export const selectDatesShown = createSelector(
 	}
 )
 
-export const selectHoursDifferenceBetweenSlots = createSelector(
-	selectSlotsPerHour,
-
-	(slotsPerHour): number => 1 / slotsPerHour
-)
-
-export const selectNumberOfSlots = createSelector(
-	selectSlotsPerHour,
-	selectHoursPerDay,
-
-	(slotsPerHour, hoursPerDay): number => slotsPerHour * hoursPerDay
-)
-
 export const selectSlotsArray = createSelector(
-	selectNumberOfSlots,
-	selectHoursDifferenceBetweenSlots,
+	selectHoursPerDay,
+	selectSlotsPerHour,
 
-	(numberOfSlots: number, hoursDifferenceBetweenSlots: number): string[] => {
+	(hoursPerDay: number, slotsPerHour: number): string[] => {
+		const numberOfSlots = hoursPerDay * slotsPerHour
+
+		const hoursDifferenceBetweenSlots = 1 / slotsPerHour
+
 		const startOfStartDate = dayjs('2020-01-01').startOf('day')
 
 		return [...Array(numberOfSlots)].map((e, i) =>

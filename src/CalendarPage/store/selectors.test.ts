@@ -5,8 +5,6 @@ import {
 	selectSlotsPerHour,
 	selectTimeBlocksPerHour,
 	selectTimeLabelsPerHour,
-	selectHoursDifferenceBetweenSlots,
-	selectNumberOfSlots,
 	selectSlotsArray,
 	selectTimeBlocksArray,
 	selectTimeLabelsArray,
@@ -49,13 +47,5 @@ describe('CalendarPage Selectors', () => {
 		expect(selectTimeLabelsPerHour(state)).toBe(
 			selectCalendar(state).timeLabelsPerHour
 		)
-	})
-
-	it('selectHoursDifferenceBetweenSlots', () => {
-		expect(selectHoursDifferenceBetweenSlots.resultFunc(12)).toBe(1 / 12)
-	})
-
-	it('selectNumberOfSlots', () => {
-		expect(selectNumberOfSlots.resultFunc(12, 24)).toBe(288)
 	})
 })
