@@ -13,7 +13,7 @@ type Lines = {
 	}
 }
 
-export const lines: Lines = {
+export const lines = {
 	rows: {
 		end: 'END_LINE',
 		head: {
