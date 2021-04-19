@@ -85,15 +85,10 @@ export const selectNumberOfSlots = createSelector(
 
 export const selectSlotsArray = createSelector(
 	selectNumberOfSlots,
-	selectStartDate,
 	selectHoursDifferenceBetweenSlots,
 
-	(
-		numberOfSlots: number,
-		startDate: string,
-		hoursDifferenceBetweenSlots: number
-	): string[] => {
-		const startOfStartDate = dayjs(startDate).startOf('day')
+	(numberOfSlots: number, hoursDifferenceBetweenSlots: number): string[] => {
+		const startOfStartDate = dayjs('2020-01-01').startOf('day')
 
 		return [...Array(numberOfSlots)].map((e, i) =>
 			startOfStartDate
