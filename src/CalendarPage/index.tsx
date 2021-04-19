@@ -15,6 +15,7 @@ import {
 	selectDatesShown,
 	selectEventsShown,
 } from 'CalendarPage/store/selectors'
+import { lines } from 'CalendarPage/config'
 
 type ContainerProps = {
 	datesShown: string[]
@@ -25,13 +26,10 @@ const Container = styled.div<ContainerProps>`
 	display: grid;
 	grid-template-columns: ${p => generateGridTemplateColumns(p.datesShown)};
 	grid-template-rows: ${p =>
-		`[headrow-start] auto [headrow-end ${p.slotGridTemplateRows}`};
+		`[${lines.rows.head.start}] auto [${lines.rows.head.end} ${p.slotGridTemplateRows}`};
 	height: 750px;
 	width: 1200px;
-	background-color: aliceblue;
-	&:hover {
-		background-color: azure;
-	}
+	background-color: ${p => p.theme.background};
 	margin-bottom: 16px;
 `
 
